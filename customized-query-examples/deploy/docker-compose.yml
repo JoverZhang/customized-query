@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+  mysql:
+    image: percona:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./mysql/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
