@@ -8,7 +8,7 @@
 docker-compose up
 ```
 
-##### 2. 依次运行 customized-query-example-server 与 customized-query-example-client
+##### 2. 依次启动 customized-query-example-server 与 customized-query-example-client
 
 **可使用下方链接可直接跳转到对应的启动类**
 
@@ -64,18 +64,25 @@ public class DemoUser extends AbstractEntity {
      */
     private BigDecimal balance;
 
-    /**
-     * 假设为索引字段, 允许等值与区间查询
-     */
-    private Date birthday;
+   /**
+    * 假设为索引字段, 允许等值与区间查询
+    */
+   private Date birthday;
 
 }
 ```
 
 ### 2. 定义与 DO 相对应的查询实体 (Query)
 
-1. 手动定制查询条件
+**三个步骤**
+
+1. 继承抽象类 AbstractRecoverableQuery
 1. 实现静态方法 queryBuilder()
+1. 定制查询条件
+   - 定义仅允许等值查询: `变量类型 变量名称;` 如 `String name;`
+   - 定义即允许等值查询, 又允许区间查询 `Range<变量类型> 变量名称;` 如 `Range<Long> id;`
+   - 定义可排序字段: `Boolean orderBy变量名` 变量名需首字母大写, 如 `Boolean orderById;`
+     (当参数为 true 时正序, false 倒序)
 
 [Jump to DemoUserQuery](./customized-query-examples/customized-query-example-server/service-api/src/main/java/org/customizedquery/example/server/domain/query/DemoUserQuery.java)
 
@@ -93,9 +100,9 @@ public class DemoUserQuery extends AbstractRecoverableQuery {
      */
     private Range<Long> id;
 
-    /**
-     * 定义允许等值查询的字段
-     */
+   /**
+    * 定义仅允许等值查询的字段
+    */
     private String name;
 
     /**
@@ -103,9 +110,9 @@ public class DemoUserQuery extends AbstractRecoverableQuery {
      */
     private Range<Date> birthday;
 
-    /**
-     * 定义允许等值查询的字段
-     */
+   /**
+    * 定义仅允许等值查询的字段
+    */
     private Boolean orderById;
 
     /**
