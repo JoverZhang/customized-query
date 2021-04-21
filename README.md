@@ -54,15 +54,15 @@ curl 'localhost:9000/example-query/example-page'
 @EqualsAndHashCode(callSuper = true)
 public class DemoUser extends AbstractEntity {
 
-    /**
-     * 假设为唯一索引字段, 允许等值查询
-     */
-    private String name;
+   /**
+    * 假设为唯一索引字段, 允许等值查询
+    */
+   private String name;
 
-    /**
-     * 假设非索引字段, 不允许作为查询条件
-     */
-    private BigDecimal balance;
+   /**
+    * 假设非索引字段, 不允许作为查询条件
+    */
+   private BigDecimal balance;
 
    /**
     * 假设为索引字段, 允许等值与区间查询
@@ -95,34 +95,34 @@ public class DemoUser extends AbstractEntity {
 @EqualsAndHashCode(callSuper = true)
 public class DemoUserQuery extends AbstractRecoverableQuery {
 
-    /**
-     * 定义即允许等值查询, 又允许区间查询的字段
-     */
-    private Range<Long> id;
+   /**
+    * 定义即允许等值查询, 又允许区间查询的字段
+    */
+   private Range<Long> id;
 
    /**
     * 定义仅允许等值查询的字段
     */
-    private String name;
+   private String name;
 
-    /**
-     * 定义即允许等值查询, 又允许区间查询的字段
-     */
-    private Range<Date> birthday;
+   /**
+    * 定义即允许等值查询, 又允许区间查询的字段
+    */
+   private Range<Date> birthday;
 
    /**
     * 定义仅允许等值查询的字段
     */
-    private Boolean orderById;
+   private Boolean orderById;
 
-    /**
-     * 定义允许排序的字段
-     */
-    private Boolean orderByName;
+   /**
+    * 定义允许排序的字段
+    */
+   private Boolean orderByName;
 
-    /**
-     * 定义允许排序的字段
-     */
+   /**
+    * 定义允许排序的字段
+    */
     private Boolean orderByBirthday;
 
     /**
