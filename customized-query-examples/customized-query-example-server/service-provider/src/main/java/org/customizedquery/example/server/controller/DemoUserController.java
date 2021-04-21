@@ -25,6 +25,24 @@ public class DemoUserController implements DemoUserApi {
 
     private final DemoUserRepository demoUserRepository;
 
+    @Override
+    public DemoUserDTO one(DemoUserQuery demoUserQuery) {
+        DemoUser demoUser = demoUserRepository.one(demoUserQuery);
+        return convert(demoUser);
+    }
+
+    @Override
+    public List<DemoUserDTO> list(PaginationQuery<DemoUserQuery> paginationQuery) {
+        List<DemoUser> demoUsers = demoUserRepository.list(paginationQuery);
+        return convertAll(demoUsers);
+    }
+
+    @Override
+    public Page<DemoUserDTO> page(PaginationQuery<DemoUserQuery> paginationQuery) {
+        var page = demoUserRepository.page(paginationQuery);
+        return convertAll(page);
+    }
+
     static Page<DemoUserDTO> convertAll(com.baomidou.mybatisplus.extension.plugins.pagination.Page<DemoUser> page) {
         Page<DemoUserDTO> rst = new Page<>();
         rst.setRecords(convertAll(page.getRecords()));
@@ -47,24 +65,6 @@ public class DemoUserController implements DemoUserApi {
         dto.setBalance(o.getBalance());
         dto.setBirthday(o.getBirthday());
         return dto;
-    }
-
-    @Override
-    public DemoUserDTO one(DemoUserQuery demoUserQuery) {
-        DemoUser demoUser = demoUserRepository.one(demoUserQuery);
-        return convert(demoUser);
-    }
-
-    @Override
-    public List<DemoUserDTO> list(PaginationQuery<DemoUserQuery> paginationQuery) {
-        List<DemoUser> demoUsers = demoUserRepository.list(paginationQuery);
-        return convertAll(demoUsers);
-    }
-
-    @Override
-    public Page<DemoUserDTO> page(PaginationQuery<DemoUserQuery> paginationQuery) {
-        var page = demoUserRepository.page(paginationQuery);
-        return convertAll(page);
     }
 
 }
