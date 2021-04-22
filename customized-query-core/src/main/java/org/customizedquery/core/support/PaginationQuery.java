@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaginationQuery<T> {
+public class PaginationQuery<T extends AbstractRecoverableQuery> {
 
     @Min(1)
     @NotNull
@@ -28,11 +28,11 @@ public class PaginationQuery<T> {
 
     private T query;
 
-    public static <T> PaginationQuery<T> query(int current, int size) {
+    public static <T extends AbstractRecoverableQuery> PaginationQuery<T> query(int current, int size) {
         return query(current, size, null);
     }
 
-    public static <T> PaginationQuery<T> query(int current, int size, T query) {
+    public static <T extends AbstractRecoverableQuery> PaginationQuery<T> query(int current, int size, T query) {
         return new PaginationQuery<>(current, size, query);
     }
 
