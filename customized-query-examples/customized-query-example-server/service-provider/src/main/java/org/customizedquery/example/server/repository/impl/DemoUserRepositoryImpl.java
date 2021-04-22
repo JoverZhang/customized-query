@@ -27,20 +27,20 @@ public class DemoUserRepositoryImpl implements DemoUserRepository {
 
     @Override
     public DemoUser one(DemoUserQuery query) {
-        QueryWrapper<DemoUser> wrapper = MybatisPlusRecover.recover(query, DemoUser.class);
+        QueryWrapper<DemoUser> wrapper = MybatisPlusRecover.toWrapper(query, DemoUser.class);
         return demoUserDao.selectOne(wrapper);
     }
 
     @Override
     public List<DemoUser> list(PaginationQuery<DemoUserQuery> query) {
-        QueryWrapper<DemoUser> wrapper = MybatisPlusRecover.recover(query.getQuery(), DemoUser.class);
+        QueryWrapper<DemoUser> wrapper = MybatisPlusRecover.toWrapper(query.getQuery(), DemoUser.class);
         wrapper.last(" LIMIT " + query.getOffset() + ", " + query.getLimit());
         return demoUserDao.selectList(wrapper);
     }
 
     @Override
     public Page<DemoUser> page(PaginationQuery<DemoUserQuery> query) {
-        QueryWrapper<DemoUser> wrapper = MybatisPlusRecover.recover(query.getQuery(), DemoUser.class);
+        QueryWrapper<DemoUser> wrapper = MybatisPlusRecover.toWrapper(query.getQuery(), DemoUser.class);
         return demoUserDao.selectPage(new Page<>(query.getCurrent(), query.getSize()), wrapper);
     }
 
